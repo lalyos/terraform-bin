@@ -13,6 +13,7 @@ RUN go get -u github.com/hashicorp/terraform
 WORKDIR src/github.com/hashicorp/terraform/
 RUN make updatedeps
 
+VOLUME /data
 
 RUN make bin && \
     cd pkg/${XC_OS}_${XC_ARCH} && \
