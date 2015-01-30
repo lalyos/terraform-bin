@@ -15,7 +15,7 @@ RUN make updatedeps
 
 VOLUME /data
 
-RUN echo 'cd /go/src/github.com/hashicorp/terraform/ && git fetch && git reset --hard ${GIT_TAG:=origin/master} && make bin && cd pkg/darwin_amd64 && version=$(terraform --version|grep "^Terraform"| cut -d " " -f 2) && zip /data/terraform_${version}_darwin_amd64.zip terraform*' > /build && \
-    chmod +x /build
+ADD https://raw.githubusercontent.com/lalyos/terraform-bin/master/build /build
+RUN chmod +x /build
 
 CMD /build
