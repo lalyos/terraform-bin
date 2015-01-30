@@ -1,5 +1,7 @@
 #!/bin/bash
 
+apt-get update && apt-get install -y zip
+
 go get -u github.com/hashicorp/terraform
 cd src/github.com/hashicorp/terraform/
 make updatedeps
