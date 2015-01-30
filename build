@@ -1,0 +1,14 @@
+!/bin/bash
+
+main() {
+
+  cd /go/src/github.com/hashicorp/terraform/
+  git fetch && git reset --hard ${GIT_TAG:=origin/master}
+
+  make bin
+  cd pkg/darwin_amd64
+  version=$(terraform --version|grep "^Terraform"| cut -d " " -f 2)
+  zip /data/terraform_${version}_darwin_amd64.zip terraform*
+}
+
+[[ "$0" == "$BASH_SOURCE" ]] && main "$@"
