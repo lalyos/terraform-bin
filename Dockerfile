@@ -15,8 +15,7 @@ RUN make updatedeps
 
 VOLUME /data
 
-RUN make bin && \
-    cd pkg/${XC_OS}_${XC_ARCH} && \
-    version=$(terraform --version|grep "^Terraform"| cut -d " " -f 2) && \
-    zip /data/terraform_${version}_darwin_amd64.zip terraform*
+RUN echo 'make bin && cd pkg/${XC_OS}_${XC_ARCH} && version=$(terraform --version|grep "^Terraform"| cut -d " " -f 2) && zip /data/terraform_${version}_darwin_amd64.zip terraform* && cd -' > build.sh && \
+    chmod +x build.sh
     
+RUN build.sh
