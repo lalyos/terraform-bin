@@ -14,7 +14,8 @@ WORKDIR src/github.com/hashicorp/terraform/
 RUN make updatedeps
 
 
-#make bin
-#cd cd pkg/${XC_OS}_${XC_ARCH}
-#version=$(terraform --version|grep "^Terraform"| cut -d " " -f 2)
-#zip /data/terraform_${version}_darwin_amd64.zip terraform*
+RUN make bin && \
+    cd pkg/${XC_OS}_${XC_ARCH} && \
+    version=$(terraform --version|grep "^Terraform"| cut -d " " -f 2) && \
+    zip /data/terraform_${version}_darwin_amd64.zip terraform*
+    
